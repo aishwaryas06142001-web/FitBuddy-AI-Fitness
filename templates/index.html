@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>FitBuddy - AI Workout Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .container { max-width: 700px; margin: auto; }
+        .result { background: #f4f4f4; padding: 20px; border-radius: 8px; margin-top: 20px; white-space: pre-wrap; }
+        .error { color: red; }
+    </style>
 </head>
 <body>
-    <h1>FitBuddy - AI Workout Generator</h1>
-    <form action="/generate-workout" method="post">
-        <label>Name:</label>
-        <input type="text" name="username" required><br><br>
-        
-        <label>Age:</label>
-        <input type="number" name="age" required><br><br>
+    <div class="container">
+        <h1>🏋️ FitBuddy - AI Fitness Plan Generator</h1>
+        <form action="/generate-workout" method="post">
+            <label><strong>Name:</strong></label><br>
+            <input type="text" name="username" required><br><br>
 
-        <label>Fitness Goal:</label>
-        <input type="text" name="goal" placeholder="e.g. weight loss" required><br><br>
+            <label><strong>Age:</strong></label><br>
+            <input type="number" name="age" required><br><br>
 
-        <button type="submit">Generate Plan</button>
-    </form>
+            <label><strong>Fitness Goal:</strong></label><br>
+            <input type="text" name="goal" placeholder="e.g. Weight Loss / Muscle Gain" required><br><br>
+
+            <label><strong>Workout Intensity:</strong></label><br>
+            <select name="intensity">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select><br><br>
+
+            <button type="submit" style="padding: 10px 20px; cursor: pointer;">Generate 7-Day Plan</button>
+        </form>
+
+        {% if workout_plan %}
+            <div class="result">
+                <h2>Generated Plan for {{ username }}</h2>
+                <p>{{ workout_plan }}</p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <p class="error">Error: {{ error }}</p>
+        {% endif %}
+    </div>
 </body>
 </html>
